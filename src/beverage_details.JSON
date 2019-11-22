@@ -1,0 +1,30 @@
+{
+  "25318": {
+    "empId": 25318,
+    "beverageInfo": [
+      {
+        "beverage": "grape",
+        "quantity": 1,
+        "date": "2019-11-20T05:50:28.267Z"
+      },
+      {
+        "beverage": "orange",
+        "quantity": 1,
+        "date": "2019-11-21T05:50:28.267Z"
+      }
+    ],
+    "beverageCount": 2
+  },
+
+  "25314": {
+    "empId": 25314,
+    "beverageInfo": [
+      {
+        "beverage": "mango",
+        "quantity": 1,
+        "date": "2019-11-20T05:50:28.267Z"
+      }
+    ],
+    "beverageCount": 1
+  }
+}
