@@ -3,3 +3,5 @@ node_modules/
 todo.txt
 
 .tmp.txt
+
+.beverage_details.JSON

@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-let beverageLog = fs.readFileSync("./src/beverage_details.JSON", "utf8");
+let beverageLog = fs.readFileSync("./src/.beverage_details.JSON", "utf8");
 beverageLog = JSON.parse(beverageLog);
 
 const enquire = function(userInput) {
