@@ -1,0 +1,73 @@
+{
+  "testObject": {
+    "25318": {
+      "employeeId": "25318",
+      "beverageInfo": [
+        {
+          "beverage": "grape",
+          "quantity": 1,
+          "date": "2019-11-20T05:50:28.267Z"
+        }
+      ],
+      "beverageCount": 1
+    }
+  },
+  "insertionTestInput": {
+    "id": "25314",
+    "entry": {
+      "beverage": "mango",
+      "quantity": 1,
+      "date": "2019-11-20T05:50:28.267Z"
+    }
+  },
+  "updationTestInput": {
+    "id": "25318",
+    "entry": {
+      "beverage": "banana",
+      "quantity": 1,
+      "date": "2019-11-20T05:50:28.267Z"
+    }
+  },
+  "insertionTestExpected": {
+    "25318": {
+      "employeeId": "25318",
+      "beverageInfo": [
+        {
+          "beverage": "grape",
+          "quantity": 1,
+          "date": "2019-11-20T05:50:28.267Z"
+        }
+      ],
+      "beverageCount": 1
+    },
+    "25314": {
+      "employeeId": "25314",
+      "beverageInfo": [
+        {
+          "beverage": "mango",
+          "quantity": 1,
+          "date": "2019-11-20T05:50:28.267Z"
+        }
+      ],
+      "beverageCount": 1
+    }
+  },
+  "updationTestExpected": {
+    "25318": {
+      "employeeId": "25318",
+      "beverageInfo": [
+        {
+          "beverage": "grape",
+          "quantity": 1,
+          "date": "2019-11-20T05:50:28.267Z"
+        },
+        {
+          "beverage": "banana",
+          "quantity": 1,
+          "date": "2019-11-20T05:50:28.267Z"
+        }
+      ],
+      "beverageCount": 2
+    }
+  }
+}

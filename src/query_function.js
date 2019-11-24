@@ -4,20 +4,28 @@ let beverageLog = fs.readFileSync("./src/beverage_details.JSON", "utf8");
 beverageLog = JSON.parse(beverageLog);
 
 const enquire = function(userInput) {
-  const empLog = beverageLog[userInput[1]];
+  const employeeLog = beverageLog[userInput[1]];
   let result = [];
 
-  if (empLog == undefined) {
-    return "";
+  if (employeeLog == undefined) {
+    return "Employee details do not exist";
   }
 
-  const header = "Employee ID, Beverage, Quantity, Date\n";
-  const footer = "\nTotal: " + empLog.beverageCount + " Juices";
+  const header = "Employee ID,Beverage,Quantity,Date\n";
+  const footer = "\nTotal: " + employeeLog.beverageCount + " Juices";
+  const beverageInfo = employeeLog.beverageInfo;
 
-  for (let index = 0; index < empLog.beverageInfo.length; index++) {
-    let entry = Object.values(empLog.beverageInfo[index]);
-    entry.unshift(empLog.empId);
-    result.push(entry);
+  for (let index = 0; index < beverageInfo.length; index++) {
+    const infoLine =
+      employeeLog.employeeId +
+      "," +
+      beverageInfo[index].beverage +
+      "," +
+      beverageInfo[index].quantity +
+      "," +
+      beverageInfo[index].date;
+
+    result.push(infoLine);
   }
 
   return header + result.join("\n") + footer;

@@ -1,6 +1,6 @@
 {
   "25318": {
-    "empId": 25318,
+    "employeeId": "25318",
     "beverageInfo": [
       {
         "beverage": "grape",
@@ -17,7 +17,7 @@
   },
 
   "25314": {
-    "empId": 25314,
+    "employeeId": "25314",
     "beverageInfo": [
       {
         "beverage": "mango",

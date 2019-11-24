@@ -1,8 +1,12 @@
 const enquire = require("./src/query_function.js").enquire;
+const save = require("./src/saveTransaction_function.js").saveTransaction;
 
 const main = function() {
-  const userIn = process.argv.slice(2);
-  console.log(enquire(userIn));
+  const timeStamp = { stamp: new Date(), path: "./src/beverage_details.JSON" };
+  const lookup = { "--save": save.bind(timeStamp), "--query": enquire };
+
+  const userIn = process.argv.slice(3);
+  console.log(lookup[process.argv[2]](userIn));
 };
 
 main();
