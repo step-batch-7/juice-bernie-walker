@@ -5,9 +5,8 @@ const updateExisting = function(record, insertionId, insertionInfo) {
 
 const insertNew = function(record, insertionId, insertionInfo) {
   record[insertionId] = {
-    employeeId: insertionId,
     beverageInfo: [insertionInfo],
-    beverageCount: 1
+    beverageCount: insertionInfo.quantity
   };
 };
 

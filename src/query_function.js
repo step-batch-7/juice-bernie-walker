@@ -4,7 +4,8 @@ let beverageLog = fs.readFileSync("./src/.beverage_details.JSON", "utf8");
 beverageLog = JSON.parse(beverageLog);
 
 const enquire = function(userInput) {
-  const employeeLog = beverageLog[userInput[1]];
+  const employeeId = userInput[1];
+  const employeeLog = beverageLog[employeeId];
   let result = [];
 
   if (employeeLog == undefined) {
@@ -17,7 +18,7 @@ const enquire = function(userInput) {
 
   for (let index = 0; index < beverageInfo.length; index++) {
     const infoLine =
-      employeeLog.employeeId +
+      employeeId +
       "," +
       beverageInfo[index].beverage +
       "," +

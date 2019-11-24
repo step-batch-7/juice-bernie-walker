@@ -1,7 +1,6 @@
 {
   "testObject": {
     "25318": {
-      "employeeId": "25318",
       "beverageInfo": [
         {
           "beverage": "grape",
@@ -16,7 +15,7 @@
     "id": "25314",
     "entry": {
       "beverage": "mango",
-      "quantity": 1,
+      "quantity": 2,
       "date": "2019-11-20T05:50:28.267Z"
     }
   },
@@ -30,7 +29,6 @@
   },
   "insertionTestExpected": {
     "25318": {
-      "employeeId": "25318",
       "beverageInfo": [
         {
           "beverage": "grape",
@@ -41,20 +39,18 @@
       "beverageCount": 1
     },
     "25314": {
-      "employeeId": "25314",
       "beverageInfo": [
         {
           "beverage": "mango",
-          "quantity": 1,
+          "quantity": 2,
           "date": "2019-11-20T05:50:28.267Z"
         }
       ],
-      "beverageCount": 1
+      "beverageCount": 2
     }
   },
   "updationTestExpected": {
     "25318": {
-      "employeeId": "25318",
       "beverageInfo": [
         {
           "beverage": "grape",
