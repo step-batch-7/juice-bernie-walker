@@ -11,28 +11,27 @@ const saveValidatorAndFormatter = function(inputToCheck) {
   const check2 = Number.isInteger(+id);
   const check3 = Number.isInteger(+quantity);
 
-  if (inputToCheck.length == 6 && check1 && check2 && check3) {
+  if (inputToCheck.length == 6 && check1 && check2 && check3)
     return ["--save", [id, beverage, quantity]];
-  }
 
   return ["error", inputToCheck];
 };
 
 const queryValidatorAndFormatter = function(inputToCheck) {
-  if (inputToCheck.length == 2 && inputToCheck[0] == "--empId") {
+  if (inputToCheck.length == 2 && inputToCheck[0] == "--empId")
     return ["--query", [inputToCheck[1]]];
-  }
+
   return ["error", inputToCheck];
 };
 
 const validatorAndFormatter = function(userInput) {
-  if (userInput[0] == "--query") {
-    return queryValidatorAndFormatter(userInput.slice(1));
-  }
+  const functionLookup = {
+    "--query": queryValidatorAndFormatter,
+    "--save": saveValidatorAndFormatter
+  };
 
-  if (userInput[0] == "--save") {
-    return saveValidatorAndFormatter(userInput.slice(1));
-  }
+  if (functionLookup[userInput[0]])
+    return functionLookup[userInput[0]](userInput.slice(1));
 
   return ["error", userInput];
 };
