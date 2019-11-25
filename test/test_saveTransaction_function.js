@@ -15,6 +15,6 @@ describe("save", function() {
     const actual = save.apply(stampAndPath, testInput);
     const expected = line1 + "11111,banana,1," + stampAndPath.stamp.toJSON();
     assert.strictEqual(actual, expected);
-    fs.writeFileSync("test/.fake_database_save.txt", "", "utf8");
+    fs.writeFileSync("test/.write_fake_database.json", "", "utf8");
   });
 });
