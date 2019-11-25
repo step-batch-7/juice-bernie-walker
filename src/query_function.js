@@ -1,14 +1,15 @@
 const fs = require("fs");
 
-let beverageLog = fs.readFileSync("./src/.beverage_details.JSON", "utf8");
-beverageLog = JSON.parse(beverageLog);
+let beverageLog = JSON.parse(
+  fs.readFileSync("./src/.beverage_details.JSON", "utf8")
+);
 
 const enquire = function(userInput) {
-  const employeeId = userInput[1];
+  const employeeId = userInput[0];
   const employeeLog = beverageLog[employeeId];
   let result = [];
 
-  if (employeeLog == undefined) {
+  if (!employeeLog) {
     return "Employee details do not exist";
   }
 

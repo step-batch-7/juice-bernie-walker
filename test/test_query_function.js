@@ -9,12 +9,12 @@ describe("enquire", function() {
   it("should return error message for wrong Id or no input", function() {
     let actual = enquire([]);
     assert.strictEqual(actual, "Employee details do not exist");
-    actual = enquire(["--empId", "01010"]);
+    actual = enquire(["01010"]);
     assert.strictEqual(actual, "Employee details do not exist");
   });
 
   it("should return the output table of requested employee for a certain ID", function() {
-    const actual = enquire(["--empId", "25314"]);
+    const actual = enquire(["25314"]);
     const expected = line1 + line2 + line3;
     assert.strictEqual(actual, expected);
   });

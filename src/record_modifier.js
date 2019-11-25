@@ -14,7 +14,7 @@ const recordModifier = function(recordToModify, modifyId, recordEntry) {
   const modifierLookup = { new: insertNew, exists: updateExisting };
   let lookupKey = "exists";
 
-  if (recordToModify[modifyId] == undefined) {
+  if (!recordToModify[modifyId]) {
     lookupKey = "new";
   }
 
