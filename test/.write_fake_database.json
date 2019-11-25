@@ -1,0 +1,22 @@
+{
+  "11111": {
+    "beverageInfo": [
+      {
+        "beverage": "banana",
+        "quantity": 1,
+        "date": "2019-11-25T15:22:06.546Z"
+      }
+    ],
+    "beverageCount": 1
+  },
+  "25314": {
+    "beverageInfo": [
+      {
+        "beverage": "mango",
+        "quantity": 1,
+        "date": "2019-11-20T05:50:28.267Z"
+      }
+    ],
+    "beverageCount": 1
+  }
+}

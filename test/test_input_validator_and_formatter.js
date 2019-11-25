@@ -1,4 +1,4 @@
-const validatorAndFormatter = require("../src/input_validtor_and_formatter.js")
+const validatorAndFormatter = require("../src/input_validator_and_formatter.js")
   .validatorAndFormatter;
 const assert = require("assert");
 

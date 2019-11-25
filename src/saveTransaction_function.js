@@ -1,11 +1,9 @@
 const recordModifier = require("./record_modifier.js").recordModifier;
 const fs = require("fs");
 
-let beverageLog = JSON.parse(
-  fs.readFileSync("./src/.beverage_details.JSON", "utf8")
-);
-
 const saveTransaction = function(userInput) {
+  let beverageLog = JSON.parse(fs.readFileSync(this.readPath, "utf8"));
+
   employeeId = userInput[0];
   beverageType = userInput[1];
   qty = +userInput[2];
@@ -19,16 +17,15 @@ const saveTransaction = function(userInput) {
 
   recordModifier(beverageLog, employeeId, newEntry);
 
-  fs.writeFileSync(this.path, JSON.stringify(beverageLog, null, 2), "utf8");
+  fs.writeFileSync(
+    this.writePath,
+    JSON.stringify(beverageLog, null, 2),
+    "utf8"
+  );
 
-  const printMessage =
-    employeeId +
-    "," +
-    newEntry.beverage +
-    "," +
-    newEntry.quantity +
-    "," +
-    newEntry.date.toJSON();
+  const printMessage = `${employeeId},${newEntry.beverage},${
+    newEntry.quantity
+  },${newEntry.date.toJSON()}`;
 
   return header + printMessage;
 };
