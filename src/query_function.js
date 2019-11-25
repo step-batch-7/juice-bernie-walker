@@ -7,7 +7,7 @@ const enquire = function(userInput) {
   const employeeLog = beverageLog[employeeId];
   let result = [];
 
-  if (!employeeLog) return "Employee details do not exist";
+  if (!(employeeId in beverageLog)) return "Employee details do not exist";
 
   const header = "Employee ID,Beverage,Quantity,Date\n";
   const footer = "\nTotal: " + employeeLog.beverageCount + " Juices";

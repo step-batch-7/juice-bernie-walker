@@ -30,7 +30,7 @@ const validatorAndFormatter = function(userInput) {
     "--save": saveValidatorAndFormatter
   };
 
-  if (functionLookup[userInput[0]])
+  if (userInput[0] in functionLookup)
     return functionLookup[userInput[0]](userInput.slice(1));
 
   return ["error", userInput];
