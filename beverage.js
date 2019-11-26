@@ -3,13 +3,10 @@ const save = require("./src/saveTransaction_function.js").saveTransaction;
 const validatorAndFormatter = require("./src/input_validator_and_formatter.js")
   .validatorAndFormatter;
 const errorMessage = require("./src/error_message.js").errorMessage;
+const fs = require("fs");
 
 const main = function() {
-  const stampAndPath = {
-    stamp: new Date(),
-    readPath: "./src/.beverage_details.JSON",
-    writePath: "./src/.beverage_details.JSON"
-  };
+  const stampAndPath = { stamp: new Date(), fs: fs };
   const lookup = {
     "--save": save.bind(stampAndPath),
     "--query": enquire.bind(stampAndPath),

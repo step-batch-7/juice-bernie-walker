@@ -4,17 +4,33 @@ const assert = require("assert");
 
 describe("save", function() {
   const line1 = "Transaction recorded:\nEmployee ID,Beverage,Quantity,Date\n";
-  const stampAndPath = {
+  const stampAndFs = {
     stamp: new Date(),
-    writePath: "./test/.write_fake_database.json",
-    readPath: "./test/.read_fake_database.json"
+    fs: {
+      readFileSync: function() {
+        const object = {
+          25314: {
+            employeeId: "25314",
+            beverageInfo: [
+              {
+                beverage: "mango",
+                quantity: 1,
+                date: "2019-11-20T05:50:28.267Z"
+              }
+            ],
+            beverageCount: 1
+          }
+        };
+        return JSON.stringify(object);
+      },
+      writeFileSync: function() {}
+    }
   };
   const testInput = [["11111", "banana", "1"]];
 
   it("should display the deatails of the enterd employee", function() {
-    const actual = save.apply(stampAndPath, testInput);
-    const expected = line1 + "11111,banana,1," + stampAndPath.stamp.toJSON();
+    const actual = save.apply(stampAndFs, testInput);
+    const expected = line1 + "11111,banana,1," + stampAndFs.stamp.toJSON();
     assert.strictEqual(actual, expected);
-    fs.writeFileSync("test/.write_fake_database.json", "", "utf8");
   });
 });

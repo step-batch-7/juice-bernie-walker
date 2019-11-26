@@ -6,21 +6,38 @@ describe("enquire", function() {
   const line2 = "\n25314,mango,1,2019-11-20T05:50:28.267Z";
   const line3 = "\nTotal: " + 1 + " Juices";
 
-  const stampAndPath = {
+  const stampAndFs = {
     stamp: new Date(),
-    writePath: "./test/.write_fake_database.json",
-    readPath: "./test/.read_fake_database.json"
+    fs: {
+      readFileSync: function() {
+        const object = {
+          25314: {
+            employeeId: "25314",
+            beverageInfo: [
+              {
+                beverage: "mango",
+                quantity: 1,
+                date: "2019-11-20T05:50:28.267Z"
+              }
+            ],
+            beverageCount: 1
+          }
+        };
+        return JSON.stringify(object);
+      },
+      writeFileSync: function() {}
+    }
   };
 
   it("should return error message for wrong Id or no input", function() {
-    let actual = enquire.call(stampAndPath, []);
+    let actual = enquire.call(stampAndFs, []);
     assert.strictEqual(actual, "Employee details do not exist");
-    actual = enquire.call(stampAndPath, ["01010"]);
+    actual = enquire.call(stampAndFs, ["01010"]);
     assert.strictEqual(actual, "Employee details do not exist");
   });
 
   it("should return the output table of requested employee for a certain ID", function() {
-    const actual = enquire.call(stampAndPath, ["25314"]);
+    const actual = enquire.call(stampAndFs, ["25314"]);
     const expected = line1 + line2 + line3;
     assert.strictEqual(actual, expected);
   });

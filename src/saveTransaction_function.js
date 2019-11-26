@@ -1,8 +1,9 @@
 const recordModifier = require("./record_modifier.js").recordModifier;
-const fs = require("fs");
 
 const saveTransaction = function(userInput) {
-  let beverageLog = JSON.parse(fs.readFileSync(this.readPath, "utf8"));
+  let beverageLog = JSON.parse(
+    this.fs.readFileSync("./src/.beverage_details.JSON", "utf8")
+  );
 
   employeeId = userInput[0];
   beverageType = userInput[1];
@@ -17,8 +18,8 @@ const saveTransaction = function(userInput) {
 
   recordModifier(beverageLog, employeeId, newEntry);
 
-  fs.writeFileSync(
-    this.writePath,
+  this.fs.writeFileSync(
+    "./src/.beverage_details.JSON",
     JSON.stringify(beverageLog, null, 2),
     "utf8"
   );
