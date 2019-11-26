@@ -5,9 +5,9 @@ const saveTransaction = function(userInput) {
     this.fs.readFileSync("./src/.beverage_details.JSON", "utf8")
   );
 
-  employeeId = userInput[0];
-  beverageType = userInput[1];
-  qty = +userInput[2];
+  employeeId = userInput.id;
+  beverageType = userInput.type;
+  qty = +userInput.qty;
 
   const header = "Transaction recorded:\nEmployee ID,Beverage,Quantity,Date\n";
   const newEntry = {

@@ -3,10 +3,10 @@ const enquire = function(userInput) {
     this.fs.readFileSync("./src/.beverage_details.JSON", "utf8")
   );
 
-  const employeeLog = beverageLog[userInput[0]];
+  const employeeLog = beverageLog[userInput.id];
   let result = [];
 
-  if (!(userInput[0] in beverageLog)) return "Employee details do not exist";
+  if (!(userInput.id in beverageLog)) return "Employee details do not exist";
 
   const header = "Employee ID,Beverage,Quantity,Date\n";
   const footer = "\nTotal: " + employeeLog.beverageCount + " Juices";

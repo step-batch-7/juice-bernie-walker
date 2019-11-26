@@ -26,7 +26,7 @@ describe("save", function() {
       writeFileSync: function() {}
     }
   };
-  const testInput = [["11111", "banana", "1"]];
+  const testInput = [{ id: "11111", type: "banana", qty: "1" }];
 
   it("should display the deatails of the enterd employee", function() {
     const actual = save.apply(stampAndFs, testInput);

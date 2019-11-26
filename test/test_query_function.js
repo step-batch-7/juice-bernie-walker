@@ -30,14 +30,14 @@ describe("enquire", function() {
   };
 
   it("should return error message for wrong Id or no input", function() {
-    let actual = enquire.call(stampAndFs, []);
+    let actual = enquire.call(stampAndFs, {});
     assert.strictEqual(actual, "Employee details do not exist");
-    actual = enquire.call(stampAndFs, ["01010"]);
+    actual = enquire.call(stampAndFs, { id: "10101" });
     assert.strictEqual(actual, "Employee details do not exist");
   });
 
   it("should return the output table of requested employee for a certain ID", function() {
-    const actual = enquire.call(stampAndFs, ["25314"]);
+    const actual = enquire.call(stampAndFs, { id: "25314" });
     const expected = line1 + line2 + line3;
     assert.strictEqual(actual, expected);
   });
