@@ -15,7 +15,8 @@ const main = function() {
 
   const userInput = process.argv.slice(2);
   const formattedInput = validatorAndFormatter(userInput);
-  console.log(lookup[formattedInput[0]](formattedInput[1]));
+  const x = formattedInput[1];
+  const input = console.log(lookup[formattedInput[0]]([x.id, x.type, x.qty]));
 };
 
 main();
