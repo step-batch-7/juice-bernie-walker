@@ -18,8 +18,26 @@ const saveValidatorAndFormatter = function(inputToCheck) {
 };
 
 const queryValidatorAndFormatter = function(inputToCheck) {
-  if (inputToCheck.length == 2 && inputToCheck[0] == "--empId")
-    return ["--query", { id: inputToCheck[1] }];
+  const idIndex = inputToCheck.lastIndexOf("--empId") + 1;
+  const dateIndex = inputToCheck.lastIndexOf("--date") + 1;
+
+  let id = undefined;
+  let date = undefined;
+
+  if (idIndex) id = inputToCheck[idIndex];
+  if (dateIndex) date = inputToCheck[dateIndex];
+
+  const check1 = idIndex + dateIndex != 0;
+  const check2 = Number.isInteger(+id) || id == undefined;
+  const check3 = new Date(date).toString() != "Invalid date";
+
+  if (
+    (inputToCheck.length == 2 || inputToCheck.length == 4) &&
+    check1 &&
+    check2 &&
+    check3
+  )
+    return ["--query", { id: id, date: date }];
 
   return ["error", {}];
 };

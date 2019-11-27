@@ -14,29 +14,58 @@ describe("validatorAndFormatter", function() {
 
   describe("queryValidatorAndFormatter", function() {
     it("should validate inputs when right", function() {
-      const actual = validatorAndFormatter(["--query", "--empId", "12345"]);
-      const expected = ["--query", { id: "12345" }];
+      let actual = validatorAndFormatter(["--query", "--empId", "12345"]);
+      let expected = ["--query", { id: "12345", date: undefined }];
+      assert.deepStrictEqual(actual, expected);
+      actual = validatorAndFormatter(["--query", "--date", "2019-11-23"]);
+      expected = ["--query", { id: undefined, date: "2019-11-23" }];
+      assert.deepStrictEqual(actual, expected);
+      actual = validatorAndFormatter([
+        "--query",
+        "--date",
+        "2019-11-23",
+        "--empId",
+        "12345"
+      ]);
+      expected = ["--query", { id: "12345", date: "2019-11-23" }];
       assert.deepStrictEqual(actual, expected);
     });
 
-    it("should validate the inputs when wrong keyword given", function() {
-      const actual = validatorAndFormatter([
+    it("should validate the inputs when wrong keyword or date given", function() {
+      let actual = validatorAndFormatter([
         "--query",
         "empId or wrong",
         "12345"
       ]);
       const expected = ["error", {}];
       assert.deepStrictEqual(actual, expected);
-    });
-
-    it("should validate the inputs when the number of arguements is not correct", function() {
-      const actual = validatorAndFormatter([
+      actual = validatorAndFormatter(
         "--query",
         "--empId",
         "12345",
-        "extraInfo"
+        "--date",
+        "wrongDate"
+      );
+      assert.deepStrictEqual(actual, expected);
+    });
+
+    it("should validate the inputs when the number of arguements is not correct", function() {
+      let actual = validatorAndFormatter([
+        "--query",
+        "--empId",
+        "12345",
+        "--date"
       ]);
       const expected = ["error", {}];
+      assert.deepStrictEqual(actual, expected);
+      actual = validatorAndFormatter([
+        "--query",
+        "--empId",
+        "12345",
+        "--date",
+        "2019-11-23",
+        "extra or wrong"
+      ]);
       assert.deepStrictEqual(actual, expected);
     });
   });
