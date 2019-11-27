@@ -10,15 +10,14 @@ describe("save", function() {
       readFileSync: function() {
         const object = {
           25314: {
-            employeeId: "25314",
             beverageInfo: [
               {
+                employeeId: "25314",
                 beverage: "mango",
                 quantity: 1,
                 date: "2019-11-20T05:50:28.267Z"
               }
-            ],
-            beverageCount: 1
+            ]
           }
         };
         return JSON.stringify(object);

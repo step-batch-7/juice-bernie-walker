@@ -1,16 +1,13 @@
 {
   "testObject": {
-    "25318": {
-      "employeeId": "25318",
-      "beverageInfo": [
-        {
-          "beverage": "grape",
-          "quantity": 1,
-          "date": "2019-11-20T05:50:28.267Z"
-        }
-      ],
-      "beverageCount": 1
-    }
+    "25318": [
+      {
+        "employeeId": "25318",
+        "beverage": "grape",
+        "quantity": 1,
+        "date": "2019-11-20T05:50:28.267Z"
+      }
+    ]
   },
   "insertionTestInput": {
     "id": "25314",
@@ -29,45 +26,37 @@
     }
   },
   "insertionTestExpected": {
-    "25318": {
-      "employeeId": "25318",
-      "beverageInfo": [
-        {
-          "beverage": "grape",
-          "quantity": 1,
-          "date": "2019-11-20T05:50:28.267Z"
-        }
-      ],
-      "beverageCount": 1
-    },
-    "25314": {
-      "employeeId": "25314",
-      "beverageInfo": [
-        {
-          "beverage": "mango",
-          "quantity": 2,
-          "date": "2019-11-20T05:50:28.267Z"
-        }
-      ],
-      "beverageCount": 2
-    }
+    "25318": [
+      {
+        "employeeId": "25318",
+        "beverage": "grape",
+        "quantity": 1,
+        "date": "2019-11-20T05:50:28.267Z"
+      }
+    ],
+    "25314": [
+      {
+        "employeeId": "25314",
+        "beverage": "mango",
+        "quantity": 2,
+        "date": "2019-11-20T05:50:28.267Z"
+      }
+    ]
   },
   "updationTestExpected": {
-    "25318": {
-      "employeeId": "25318",
-      "beverageInfo": [
-        {
-          "beverage": "grape",
-          "quantity": 1,
-          "date": "2019-11-20T05:50:28.267Z"
-        },
-        {
-          "beverage": "banana",
-          "quantity": 1,
-          "date": "2019-11-20T05:50:28.267Z"
-        }
-      ],
-      "beverageCount": 2
-    }
+    "25318": [
+      {
+        "employeeId": "25318",
+        "beverage": "grape",
+        "quantity": 1,
+        "date": "2019-11-20T05:50:28.267Z"
+      },
+      {
+        "employeeId": "25318",
+        "beverage": "banana",
+        "quantity": 1,
+        "date": "2019-11-20T05:50:28.267Z"
+      }
+    ]
   }
 }

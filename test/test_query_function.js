@@ -11,17 +11,14 @@ describe("enquire", function() {
     fs: {
       readFileSync: function() {
         const object = {
-          25314: {
-            employeeId: "25314",
-            beverageInfo: [
-              {
-                beverage: "mango",
-                quantity: 1,
-                date: "2019-11-20T05:50:28.267Z"
-              }
-            ],
-            beverageCount: 1
-          }
+          25314: [
+            {
+              employeeId: "25314",
+              beverage: "mango",
+              quantity: 1,
+              date: "2019-11-20T05:50:28.267Z"
+            }
+          ]
         };
         return JSON.stringify(object);
       },

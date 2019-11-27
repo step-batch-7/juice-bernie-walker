@@ -4,20 +4,22 @@ const enquire = function(userInput) {
   );
 
   const employeeLog = beverageLog[userInput.id];
+  let beverageCount = 0;
   let result = [];
 
   if (!(userInput.id in beverageLog)) return "Employee details do not exist";
 
-  const header = "Employee ID,Beverage,Quantity,Date\n";
-  const footer = "\nTotal: " + employeeLog.beverageCount + " Juices";
-  const beverageInfo = employeeLog.beverageInfo;
+  for (let index = 0; index < employeeLog.length; index++) {
+    const infoLine = `${employeeLog[index].employeeId},${employeeLog[index].beverage},\
+${employeeLog[index].quantity},${employeeLog[index].date}`;
 
-  for (let index = 0; index < beverageInfo.length; index++) {
-    const infoLine = `${employeeLog.employeeId},${beverageInfo[index].beverage},\
-${beverageInfo[index].quantity},${beverageInfo[index].date}`;
+    beverageCount = beverageCount + employeeLog[index].quantity;
 
     result.push(infoLine);
   }
+
+  const header = "Employee ID,Beverage,Quantity,Date\n";
+  const footer = "\nTotal: " + beverageCount + " Juices";
 
   return header + result.join("\n") + footer;
 };

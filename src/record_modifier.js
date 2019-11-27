@@ -1,14 +1,11 @@
 const updateExisting = function(record, insertionId, insertionInfo) {
-  record[insertionId].beverageInfo.push(insertionInfo);
-  record[insertionId].beverageCount += insertionInfo.quantity;
+  insertionInfo.employeeId = insertionId;
+  record[insertionId].push(insertionInfo);
 };
 
 const insertNew = function(record, insertionId, insertionInfo) {
-  record[insertionId] = {
-    employeeId: insertionId,
-    beverageInfo: [insertionInfo],
-    beverageCount: insertionInfo.quantity
-  };
+  insertionInfo.employeeId = insertionId;
+  record[insertionId] = [insertionInfo];
 };
 
 const recordModifier = function(recordToModify, modifyId, recordEntry) {
