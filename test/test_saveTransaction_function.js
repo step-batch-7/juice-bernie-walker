@@ -1,6 +1,6 @@
 const save = require("../src/saveTransaction_function.js").saveTransaction;
 const fs = require("fs");
-const assert = require("assert");
+const assert = require("chai").assert;
 
 describe("save", function() {
   const line1 = "Transaction recorded:\nEmployee ID,Beverage,Quantity,Date\n";

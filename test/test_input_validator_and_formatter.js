@@ -1,6 +1,6 @@
 const validatorAndFormatter = require("../src/input_validator_and_formatter.js")
   .validatorAndFormatter;
-const assert = require("assert");
+const assert = require("chai").assert;
 
 describe("validatorAndFormatter", function() {
   it("should give back an error array for no or wrong key function", function() {

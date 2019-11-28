@@ -1,5 +1,5 @@
 const recordModifier = require("../src/record_modifier.js").recordModifier;
-const assert = require("assert");
+const assert = require("chai").assert;
 const fs = require("fs");
 
 describe("recordModifier", function() {

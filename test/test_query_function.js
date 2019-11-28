@@ -1,5 +1,5 @@
 const enquire = require("../src/query_function.js").enquire;
-const assert = require("assert");
+const assert = require("chai").assert;
 
 describe("enquire", function() {
   const line1 = "Employee ID,Beverage,Quantity,Date";
