@@ -1,6 +1,30 @@
-const areDatesEqual = function(logDate, userDate) {
-  const ld = logDate.match(/[^a-z]+/i)[0];
-  return ld == userDate;
+const filterDesiredLog = function(arrayOfEntries, date) {
+  let result = [];
+  let beverageCount = 0;
+
+  for (entry of arrayOfEntries) {
+    const dateString = entry.date.match(/[^a-z]+/i);
+    const newDate = date || dateString;
+    if (newDate == dateString) {
+      const infoLine = `${entry.employeeId},${entry.beverage},${entry.quantity},${entry.date}`;
+
+      result.push(infoLine);
+      beverageCount = beverageCount + entry.quantity;
+    }
+  }
+
+  return { result, beverageCount };
+};
+
+const getEmployeeLog = function(record, id) {
+  let requiredRecord = [];
+  for (employee in record) {
+    const newId = id || employee;
+    if (newId == employee) {
+      requiredRecord = requiredRecord.concat(record[newId]);
+    }
+  }
+  return requiredRecord;
 };
 
 const enquire = function(userInput) {
@@ -11,33 +35,10 @@ const enquire = function(userInput) {
   const empId = userInput.id;
   const date = userInput.date;
 
-  let employeeLog = beverageLog[empId];
-  let dateCheckStatement = true;
-  let beverageCount = 0;
-  let result = [];
+  if (!date && !(empId in beverageLog)) return "Employee details do not exist";
 
-  if (date == undefined && (empId == undefined || employeeLog == undefined))
-    return "Employee details do not exist";
-
-  if (empId == undefined) {
-    employeeLog = Object.values(beverageLog).reduce(
-      (result, array) => result.concat(array),
-      []
-    );
-  }
-
-  for (let index = 0; index < employeeLog.length; index++) {
-    if (date != undefined)
-      dateCheckStatement = true && areDatesEqual(employeeLog[index].date, date);
-
-    const infoLine = `${employeeLog[index].employeeId},${employeeLog[index].beverage},\
-${employeeLog[index].quantity},${employeeLog[index].date}`;
-
-    if (dateCheckStatement) {
-      beverageCount = beverageCount + employeeLog[index].quantity;
-      result.push(infoLine);
-    }
-  }
+  const employeeLog = getEmployeeLog(beverageLog, empId);
+  const { result, beverageCount } = filterDesiredLog(employeeLog, date);
 
   if (result.length == 0) return "Employee details do not exist";
 
