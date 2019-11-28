@@ -8,11 +8,17 @@ const enquire = function(userInput) {
 
   const empId = userInput.id;
   const date = userInput.date;
+  const beverage = userInput.beverage;
 
-  if (!date && !(empId in beverageLog)) return "Employee details do not exist";
+  if (!date && !beverage && !(empId in beverageLog))
+    return "Employee details do not exist";
 
   const employeeLog = getEmployeeLog(beverageLog, empId);
-  const { result, beverageCount } = filterDesiredLog(employeeLog, date);
+  const { result, beverageCount } = filterDesiredLog(
+    employeeLog,
+    date,
+    beverage
+  );
 
   if (result.length == 0) return "Employee details do not exist";
 

@@ -40,14 +40,14 @@ describe("filterDesiredLog", function() {
     },
     {
       employeeId: "25314",
-      beverage: "mango",
+      beverage: "orange",
       quantity: 1,
       date: "2019-11-20T05:50:28.267Z"
     }
   ];
 
   it("should filter the records having a certain given date", function() {
-    const actual = filterDesiredLog(array, "2019-11-23");
+    const actual = filterDesiredLog(array, "2019-11-23", undefined);
     const expected = {
       result: ["25314,mango,1,2019-11-23T05:50:28.267Z"],
       beverageCount: 1
@@ -55,12 +55,21 @@ describe("filterDesiredLog", function() {
     assert.deepStrictEqual(actual, expected);
   });
 
-  it("should get all the records if the id is undefined", function() {
+  it("should get all the details of given beverage", function() {
+    const actual = filterDesiredLog(array, undefined, "orange");
+    const expected = {
+      result: ["25314,orange,1,2019-11-20T05:50:28.267Z"],
+      beverageCount: 1
+    };
+    assert.deepStrictEqual(actual, expected);
+  });
+
+  it("should get all the records if the date and beverage is undefined", function() {
     const actual = filterDesiredLog(array, undefined);
     const expected = {
       result: [
         "25314,mango,1,2019-11-23T05:50:28.267Z",
-        "25314,mango,1,2019-11-20T05:50:28.267Z"
+        "25314,orange,1,2019-11-20T05:50:28.267Z"
       ],
       beverageCount: 2
     };

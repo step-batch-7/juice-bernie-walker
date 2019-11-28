@@ -1,1 +1,26 @@
-{}
+{
+  "25314": [
+    {
+      "beverage": "grape",
+      "quantity": 2,
+      "date": "2019-11-28T17:52:32.160Z",
+      "employeeId": "25314"
+    }
+  ],
+  "25318": [
+    {
+      "beverage": "mango",
+      "quantity": 3,
+      "date": "2019-11-28T17:52:13.371Z",
+      "employeeId": "25318"
+    }
+  ],
+  "25340": [
+    {
+      "beverage": "papaya",
+      "quantity": 1,
+      "date": "2019-11-28T17:52:45.974Z",
+      "employeeId": "25340"
+    }
+  ]
+}

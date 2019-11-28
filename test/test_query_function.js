@@ -3,10 +3,11 @@ const assert = require("chai").assert;
 
 describe("enquire", function() {
   const line1 = "Employee ID,Beverage,Quantity,Date";
-  const line2a = "\n25314,mango,1,2019-11-23T05:50:28.267Z";
+  const line2a = "\n25314,orange,1,2019-11-23T05:50:28.267Z";
   const line2b =
-    "\n25314,mango,1,2019-11-23T05:50:28.267Z\n25318,orange,1,2019-11-23T05:50:28.267Z";
+    "\n25314,orange,1,2019-11-23T05:50:28.267Z\n25318,orange,1,2019-11-23T05:50:28.267Z";
   const line2c = "\n25318,orange,1,2019-11-23T05:50:28.267Z";
+  const line2d = "\n25318,grape,1,2019-11-20T05:50:28.267Z";
   const line3a = "\nTotal: " + 1 + " Juices";
   const line3b = "\nTotal: " + 2 + " Juices";
 
@@ -18,7 +19,7 @@ describe("enquire", function() {
           25314: [
             {
               employeeId: "25314",
-              beverage: "mango",
+              beverage: "orange",
               quantity: 1,
               date: "2019-11-23T05:50:28.267Z"
             }
@@ -27,6 +28,12 @@ describe("enquire", function() {
             {
               employeeId: "25318",
               beverage: "grape",
+              quantity: 1,
+              date: "2019-11-20T05:50:28.267Z"
+            },
+            {
+              employeeId: "25318",
+              beverage: "mango",
               quantity: 1,
               date: "2019-11-20T05:50:28.267Z"
             },
@@ -46,11 +53,16 @@ describe("enquire", function() {
 
   it("should return error message for wrong Id or no input", function() {
     let actual = enquire.call(stampAndFs, {});
-    assert.strictEqual(actual, "Employee details do not exist");
+    const expected = "Employee details do not exist";
+    assert.strictEqual(actual, expected);
     actual = enquire.call(stampAndFs, { id: "10101" });
-    assert.strictEqual(actual, "Employee details do not exist");
-    actual = enquire.call(stampAndFs, { id: "25314", date: "2019-11-20" });
-    assert.strictEqual(actual, "Employee details do not exist");
+    assert.strictEqual(actual, expected);
+    actual = enquire.call(stampAndFs, {
+      id: "25314",
+      date: "2019-11-23",
+      beverage: "grape"
+    });
+    assert.strictEqual(actual, expected);
   });
 
   it("should return the output table of requested employee for a certain ID", function() {
@@ -65,7 +77,13 @@ describe("enquire", function() {
     assert.strictEqual(actual, expected);
   });
 
-  it("should give back the employee details for a certain date and id in any order", function() {
+  it("should give back the information of a requested employee for a certain beverage", function() {
+    const actual = enquire.call(stampAndFs, { beverage: "orange" });
+    const expected = line1 + line2b + line3b;
+    assert.strictEqual(actual, expected);
+  });
+
+  it("should give back the employee details for a certain date,id and beverage in any order", function() {
     let actual = enquire.call(stampAndFs, {
       id: "25314",
       date: "2019-11-23"
@@ -74,10 +92,11 @@ describe("enquire", function() {
     assert.strictEqual(actual, expected);
 
     actual = enquire.call(stampAndFs, {
-      date: "2019-11-23",
-      id: "25318"
+      date: "2019-11-20",
+      id: "25318",
+      beverage: "grape"
     });
-    expected = line1 + line2c + line3a;
+    expected = line1 + line2d + line3a;
     assert.strictEqual(actual, expected);
   });
 });

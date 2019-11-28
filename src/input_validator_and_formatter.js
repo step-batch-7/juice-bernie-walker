@@ -20,24 +20,29 @@ const saveValidatorAndFormatter = function(inputToCheck) {
 const queryValidatorAndFormatter = function(inputToCheck) {
   const idIndex = inputToCheck.lastIndexOf("--empId") + 1;
   const dateIndex = inputToCheck.lastIndexOf("--date") + 1;
+  const bevIndex = inputToCheck.lastIndexOf("--beverage") + 1;
 
   let id = undefined;
   let date = undefined;
+  let beverage = undefined;
 
   if (idIndex) id = inputToCheck[idIndex];
   if (dateIndex) date = inputToCheck[dateIndex];
+  if (bevIndex) beverage = inputToCheck[bevIndex];
 
-  const check1 = idIndex + dateIndex != 0;
+  const check1 = idIndex + dateIndex + bevIndex != 0;
   const check2 = Number.isInteger(+id) || id == undefined;
   const check3 = new Date(date).toString() != "Invalid date";
 
   if (
-    (inputToCheck.length == 2 || inputToCheck.length == 4) &&
+    (inputToCheck.length == 2 ||
+      inputToCheck.length == 4 ||
+      inputToCheck.length == 6) &&
     check1 &&
     check2 &&
     check3
   )
-    return ["--query", { id: id, date: date }];
+    return ["--query", { id: id, date: date, beverage: beverage }];
 
   return ["error", {}];
 };

@@ -8,14 +8,15 @@ const areDatesEqual = function(date1String, date2String) {
   return yearEqual && monthEqual && dateEqual;
 };
 
-const filterDesiredLog = function(arrayOfEntries, date) {
+const filterDesiredLog = function(arrayOfEntries, date, beverage) {
   let result = [];
   let beverageCount = 0;
 
   for (entry of arrayOfEntries) {
     const newDate = date || entry.date;
+    const newBeverage = beverage || entry.beverage;
 
-    if (areDatesEqual(newDate, entry.date)) {
+    if (newBeverage == entry.beverage && areDatesEqual(newDate, entry.date)) {
       const infoLine = `${entry.employeeId},${entry.beverage},${entry.quantity},${entry.date}`;
       result.push(infoLine);
       beverageCount = beverageCount + entry.quantity;
