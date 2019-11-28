@@ -25,7 +25,7 @@ describe("save", function() {
   };
   const testInput = [{ id: "11111", type: "banana", qty: "1" }];
 
-  it("should display the deatails of the enterd employee", function() {
+  it("should display the deatails for the entered employee Id", function() {
     const actual = save.apply(stampAndFs, testInput);
     const expected = line1 + "11111,banana,1," + stampAndFs.stamp.toJSON();
     assert.strictEqual(actual, expected);

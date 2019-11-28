@@ -9,13 +9,8 @@ const insertNew = function(record, insertionId, insertionInfo) {
 };
 
 const recordModifier = function(recordToModify, modifyId, recordEntry) {
-  const modifierLookup = { new: insertNew, exists: updateExisting };
-  let lookupKey = "exists";
-
-  if (!(modifyId in recordToModify)) lookupKey = "new";
-
-  const modifier = modifierLookup[lookupKey];
-
+  let modifier = updateExisting;
+  if (!(modifyId in recordToModify)) modifier = insertNew;
   modifier(recordToModify, modifyId, recordEntry);
 };
 

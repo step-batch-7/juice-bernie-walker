@@ -65,7 +65,7 @@ describe("enquire", function() {
     assert.strictEqual(actual, expected);
   });
 
-  it("should give back the employee details for a ceretain date and id in any order", function() {
+  it("should give back the employee details for a certain date and id in any order", function() {
     let actual = enquire.call(stampAndFs, {
       id: "25314",
       date: "2019-11-23"
