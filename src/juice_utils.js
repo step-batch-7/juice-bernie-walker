@@ -4,7 +4,11 @@ const getPrintableOutput = function(printContent) {
       `${object.employeeId},${object.beverage},${object.quantity},${object.date}`
   );
 
-  return [printContent[0], body.join("\n"), printContent[2]].join("\n");
+  let line = [printContent[0], body.join("\n"), printContent[2]].join("\n");
+
+  line = line.replace(/\n\n/, "\n").replace(/\n$/, "");
+
+  return line;
 };
 
 const areDatesEqual = function(date1String, date2String) {
@@ -26,8 +30,7 @@ const filterDesiredLog = function(arrayOfEntries, date, beverage) {
     const newBeverage = beverage || entry.beverage;
 
     if (newBeverage == entry.beverage && areDatesEqual(newDate, entry.date)) {
-      const infoLine = `${entry.employeeId},${entry.beverage},${entry.quantity},${entry.date}`;
-      result.push(infoLine);
+      result.push(entry);
       beverageCount = beverageCount + entry.quantity;
     }
   }

@@ -9,7 +9,7 @@ const saveTransaction = function(userInput) {
   beverageType = userInput.type;
   qty = +userInput.qty;
 
-  const header = "Transaction recorded:\nEmployee ID,Beverage,Quantity,Date\n";
+  const header = "Transaction recorded:\nEmployee ID,Beverage,Quantity,Date";
   const newEntry = {
     beverage: beverageType,
     quantity: qty,
@@ -24,11 +24,9 @@ const saveTransaction = function(userInput) {
     "utf8"
   );
 
-  const printMessage = `${employeeId},${newEntry.beverage},${
-    newEntry.quantity
-  },${newEntry.date.toJSON()}`;
+  newEntry.date = newEntry.date.toJSON();
 
-  return header + printMessage;
+  return [header, [newEntry]];
 };
 
 exports.saveTransaction = saveTransaction;

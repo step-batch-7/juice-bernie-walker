@@ -3,7 +3,7 @@ const fs = require("fs");
 const assert = require("chai").assert;
 
 describe("save", function() {
-  const line1 = "Transaction recorded:\nEmployee ID,Beverage,Quantity,Date\n";
+  const line1 = "Transaction recorded:\nEmployee ID,Beverage,Quantity,Date";
   const stampAndFs = {
     stamp: new Date(),
     fs: {
@@ -27,7 +27,17 @@ describe("save", function() {
 
   it("should display the deatails for the entered employee Id", function() {
     const actual = save.apply(stampAndFs, testInput);
-    const expected = line1 + "11111,banana,1," + stampAndFs.stamp.toJSON();
-    assert.strictEqual(actual, expected);
+    const expected = [
+      line1,
+      [
+        {
+          employeeId: "11111",
+          beverage: "banana",
+          quantity: 1,
+          date: stampAndFs.stamp.toJSON()
+        }
+      ]
+    ];
+    assert.deepStrictEqual(actual, expected);
   });
 });

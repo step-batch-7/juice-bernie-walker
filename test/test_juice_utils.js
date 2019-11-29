@@ -50,7 +50,14 @@ describe("filterDesiredLog", function() {
   it("should filter the records having a certain given date", function() {
     const actual = filterDesiredLog(array, "2019-11-23", undefined);
     const expected = {
-      result: ["25314,mango,1,2019-11-23T05:50:28.267Z"],
+      result: [
+        {
+          employeeId: "25314",
+          beverage: "mango",
+          quantity: 1,
+          date: "2019-11-23T05:50:28.267Z"
+        }
+      ],
       beverageCount: 1
     };
     assert.deepStrictEqual(actual, expected);
@@ -59,7 +66,14 @@ describe("filterDesiredLog", function() {
   it("should get all the details of given beverage", function() {
     const actual = filterDesiredLog(array, undefined, "orange");
     const expected = {
-      result: ["25314,orange,1,2019-11-20T05:50:28.267Z"],
+      result: [
+        {
+          employeeId: "25314",
+          beverage: "orange",
+          quantity: 1,
+          date: "2019-11-20T05:50:28.267Z"
+        }
+      ],
       beverageCount: 1
     };
     assert.deepStrictEqual(actual, expected);
@@ -69,8 +83,18 @@ describe("filterDesiredLog", function() {
     const actual = filterDesiredLog(array, undefined);
     const expected = {
       result: [
-        "25314,mango,1,2019-11-23T05:50:28.267Z",
-        "25314,orange,1,2019-11-20T05:50:28.267Z"
+        {
+          employeeId: "25314",
+          beverage: "mango",
+          quantity: 1,
+          date: "2019-11-23T05:50:28.267Z"
+        },
+        {
+          employeeId: "25314",
+          beverage: "orange",
+          quantity: 1,
+          date: "2019-11-20T05:50:28.267Z"
+        }
       ],
       beverageCount: 2
     };
@@ -110,5 +134,23 @@ describe("getPrintableOutput", function() {
     const actual = getPrintableOutput([header, body, footer]);
     const expected = `${header}\n1,a,2,1-2-3\n1,a,2,1-2-3\n${footer}`;
     assert.deepStrictEqual(actual, expected);
+  });
+
+  it("should not insert a new line for footer if it is not present", function() {
+    const body = [
+      { employeeId: "1", beverage: "a", quantity: 2, date: "1-2-3" }
+    ];
+    const actual = getPrintableOutput([
+      header,
+      [{ employeeId: "1", beverage: "a", quantity: 2, date: "1-2-3" }]
+    ]);
+    const expected = `${header}\n1,a,2,1-2-3`;
+    assert.strictEqual(actual, expected);
+  });
+
+  it("should not enter a plane new line when the body array is empty", function() {
+    const actual = getPrintableOutput([header, [], footer]);
+    const expected = `${header}\n${footer}`;
+    assert.strictEqual(actual, expected);
   });
 });

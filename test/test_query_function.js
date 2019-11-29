@@ -2,14 +2,10 @@ const enquire = require("../src/query_function.js").enquire;
 const assert = require("chai").assert;
 
 describe("enquire", function() {
-  const line1 = "Employee ID,Beverage,Quantity,Date";
-  const line2a = "\n25314,orange,1,2019-11-23T05:50:28.267Z";
-  const line2b =
-    "\n25314,orange,1,2019-11-23T05:50:28.267Z\n25318,orange,1,2019-11-23T05:50:28.267Z";
-  const line2c = "\n25318,orange,1,2019-11-23T05:50:28.267Z";
-  const line2d = "\n25318,grape,1,2019-11-20T05:50:28.267Z";
-  const line3a = "\nTotal: " + 1 + " Juices";
-  const line3b = "\nTotal: " + 2 + " Juices";
+  const header = "Employee ID,Beverage,Quantity,Date";
+  const footer1 = "Total: 0 Juices";
+  const footer2 = "Total: 2 Juices";
+  const footer3 = "Total: 1 Juices";
 
   const stampAndFs = {
     stamp: new Date(),
@@ -19,29 +15,29 @@ describe("enquire", function() {
           25314: [
             {
               employeeId: "25314",
-              beverage: "orange",
-              quantity: 1,
-              date: "2019-11-23T05:50:28.267Z"
-            }
-          ],
-          25318: [
-            {
-              employeeId: "25318",
               beverage: "grape",
               quantity: 1,
               date: "2019-11-20T05:50:28.267Z"
             },
             {
-              employeeId: "25318",
-              beverage: "mango",
+              employeeId: "25314",
+              beverage: "orange",
               quantity: 1,
-              date: "2019-11-20T05:50:28.267Z"
-            },
+              date: "2019-11-23T05:50:28.268Z"
+            }
+          ],
+          25318: [
             {
               employeeId: "25318",
               beverage: "orange",
               quantity: 1,
-              date: "2019-11-23T05:50:28.267Z"
+              date: "2019-11-20T05:50:28.269Z"
+            },
+            {
+              employeeId: "25318",
+              beverage: "mango",
+              quantity: 1,
+              date: "2019-11-23T05:50:28.260Z"
             }
           ]
         };
@@ -53,34 +49,85 @@ describe("enquire", function() {
 
   it("should return error message for wrong Id or no input", function() {
     let actual = enquire.call(stampAndFs, {});
-    const expected = "Employee details do not exist";
-    assert.strictEqual(actual, expected);
+    const expected = [header, [], footer1];
+    assert.deepStrictEqual(actual, expected);
     actual = enquire.call(stampAndFs, { id: "10101" });
-    assert.strictEqual(actual, expected);
+    assert.deepStrictEqual(actual, expected);
     actual = enquire.call(stampAndFs, {
       id: "25314",
       date: "2019-11-23",
       beverage: "grape"
     });
-    assert.strictEqual(actual, expected);
+    assert.deepStrictEqual(actual, expected);
   });
 
   it("should return the output table of requested employee for a certain ID", function() {
     const actual = enquire.call(stampAndFs, { id: "25314" });
-    const expected = line1 + line2a + line3a;
-    assert.strictEqual(actual, expected);
+    const expected = [
+      header,
+      [
+        {
+          employeeId: "25314",
+          beverage: "grape",
+          quantity: 1,
+          date: "2019-11-20T05:50:28.267Z"
+        },
+        {
+          employeeId: "25314",
+          beverage: "orange",
+          quantity: 1,
+          date: "2019-11-23T05:50:28.268Z"
+        }
+      ],
+      footer2
+    ];
+    assert.deepStrictEqual(actual, expected);
   });
 
   it("should give back the output table of a requested employee for a certain date", function() {
     const actual = enquire.call(stampAndFs, { date: "2019-11-23" });
-    const expected = line1 + line2b + line3b;
-    assert.strictEqual(actual, expected);
+    const expected = [
+      header,
+      [
+        {
+          employeeId: "25314",
+          beverage: "orange",
+          quantity: 1,
+          date: "2019-11-23T05:50:28.268Z"
+        },
+        {
+          employeeId: "25318",
+          beverage: "mango",
+          quantity: 1,
+          date: "2019-11-23T05:50:28.260Z"
+        }
+      ],
+      footer2
+    ];
+    assert.deepStrictEqual(actual, expected);
   });
 
   it("should give back the information of a requested employee for a certain beverage", function() {
     const actual = enquire.call(stampAndFs, { beverage: "orange" });
-    const expected = line1 + line2b + line3b;
-    assert.strictEqual(actual, expected);
+    const expected = [
+      header,
+      [
+        {
+          employeeId: "25314",
+          beverage: "orange",
+          quantity: 1,
+          date: "2019-11-23T05:50:28.268Z"
+        },
+        {
+          employeeId: "25318",
+          beverage: "orange",
+          quantity: 1,
+          date: "2019-11-20T05:50:28.269Z"
+        }
+      ],
+      footer2
+    ];
+    assert.deepStrictEqual(actual, expected);
   });
 
   it("should give back the employee details for a certain date,id and beverage in any order", function() {
@@ -88,15 +135,37 @@ describe("enquire", function() {
       id: "25314",
       date: "2019-11-23"
     });
-    let expected = line1 + line2a + line3a;
-    assert.strictEqual(actual, expected);
+    let expected = [
+      header,
+      [
+        {
+          employeeId: "25314",
+          beverage: "orange",
+          quantity: 1,
+          date: "2019-11-23T05:50:28.268Z"
+        }
+      ],
+      footer3
+    ];
+    assert.deepStrictEqual(actual, expected);
 
     actual = enquire.call(stampAndFs, {
-      date: "2019-11-20",
+      date: "2019-11-23",
       id: "25318",
-      beverage: "grape"
+      beverage: "mango"
     });
-    expected = line1 + line2d + line3a;
-    assert.strictEqual(actual, expected);
+    expected = [
+      header,
+      [
+        {
+          employeeId: "25318",
+          beverage: "mango",
+          quantity: 1,
+          date: "2019-11-23T05:50:28.260Z"
+        }
+      ],
+      footer3
+    ];
+    assert.deepStrictEqual(actual, expected);
   });
 });

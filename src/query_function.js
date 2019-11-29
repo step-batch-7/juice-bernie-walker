@@ -10,8 +10,11 @@ const enquire = function(userInput) {
   const date = userInput.date;
   const beverage = userInput.beverage;
 
+  const header = "Employee ID,Beverage,Quantity,Date";
+  let footer = "Total: 0 Juices";
+
   if (!date && !beverage && !(empId in beverageLog))
-    return "Employee details do not exist";
+    return [header, [], footer];
 
   const employeeLog = getEmployeeLog(beverageLog, empId);
   const { result, beverageCount } = filterDesiredLog(
@@ -19,13 +22,9 @@ const enquire = function(userInput) {
     date,
     beverage
   );
+  footer = "Total: " + beverageCount + " Juices";
 
-  if (result.length == 0) return "Employee details do not exist";
-
-  const header = "Employee ID,Beverage,Quantity,Date\n";
-  const footer = "\nTotal: " + beverageCount + " Juices";
-
-  return header + result.join("\n") + footer;
+  return [header, result, footer];
 };
 
 exports.enquire = enquire;
