@@ -15,10 +15,16 @@ describe("validatorAndFormatter", function() {
   describe("queryValidatorAndFormatter", function() {
     it("should validate inputs when right", function() {
       let actual = validatorAndFormatter(["--query", "--empId", "12345"]);
-      let expected = ["--query", { id: "12345", date: undefined }];
+      let expected = [
+        "--query",
+        { id: "12345", date: undefined, beverage: undefined }
+      ];
       assert.deepStrictEqual(actual, expected);
       actual = validatorAndFormatter(["--query", "--date", "2019-11-23"]);
-      expected = ["--query", { id: undefined, date: "2019-11-23" }];
+      expected = [
+        "--query",
+        { id: undefined, date: "2019-11-23", beverage: undefined }
+      ];
       assert.deepStrictEqual(actual, expected);
       actual = validatorAndFormatter([
         "--query",
@@ -27,7 +33,10 @@ describe("validatorAndFormatter", function() {
         "--empId",
         "12345"
       ]);
-      expected = ["--query", { id: "12345", date: "2019-11-23" }];
+      expected = [
+        "--query",
+        { id: "12345", date: "2019-11-23", beverage: undefined }
+      ];
       assert.deepStrictEqual(actual, expected);
     });
 

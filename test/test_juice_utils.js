@@ -1,7 +1,8 @@
+const assert = require("chai").assert;
 const getEmployeeLog = require("../src/juice_utils.js").getEmployeeLog;
 const filterDesiredLog = require("../src/juice_utils.js").filterDesiredLog;
 const areDatesEqual = require("../src/juice_utils.js").areDatesEqual;
-const assert = require("chai").assert;
+const getPrintableOutput = require("../src/juice_utils.js").getPrintableOutput;
 
 describe("getEmployeeLog", function() {
   const object = {
@@ -86,5 +87,28 @@ describe("areDatesEqual", function() {
   it("should deny if two dates are not equal", function() {
     const actual = areDatesEqual("2019-11-23", "2019-11-20T05:50:28.267Z");
     assert.isFalse(actual);
+  });
+});
+
+describe("getPrintableOutput", function() {
+  const header = "Sample header";
+  const footer = "Sample footer";
+  it("should produce the printable output for the given header, footer and body", function() {
+    const body = [
+      { employeeId: "1", beverage: "a", quantity: 2, date: "1-2-3" }
+    ];
+    const actual = getPrintableOutput([header, body, footer]);
+    const expected = `${header}\n1,a,2,1-2-3\n${footer}`;
+    assert.deepStrictEqual(actual, expected);
+  });
+
+  it("should be able to get printable output when there are more than one objects in the body", function() {
+    const body = [
+      { employeeId: "1", beverage: "a", quantity: 2, date: "1-2-3" },
+      { employeeId: "1", beverage: "a", quantity: 2, date: "1-2-3" }
+    ];
+    const actual = getPrintableOutput([header, body, footer]);
+    const expected = `${header}\n1,a,2,1-2-3\n1,a,2,1-2-3\n${footer}`;
+    assert.deepStrictEqual(actual, expected);
   });
 });

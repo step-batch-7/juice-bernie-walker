@@ -1,3 +1,12 @@
+const getPrintableOutput = function(printContent) {
+  const body = printContent[1].map(
+    object =>
+      `${object.employeeId},${object.beverage},${object.quantity},${object.date}`
+  );
+
+  return [printContent[0], body.join("\n"), printContent[2]].join("\n");
+};
+
 const areDatesEqual = function(date1String, date2String) {
   const date1 = new Date(date1String);
   const date2 = new Date(date2String);
@@ -39,3 +48,4 @@ const getEmployeeLog = function(record, id) {
 exports.filterDesiredLog = filterDesiredLog;
 exports.getEmployeeLog = getEmployeeLog;
 exports.areDatesEqual = areDatesEqual;
+exports.getPrintableOutput = getPrintableOutput;
