@@ -1,5 +1,7 @@
+const { loadContent } = require("./juice_utils.js");
+
 const saveTransaction = function(userInput) {
-  let beverageLog = JSON.parse(this.fs.readFileSync(this.path, "utf8"));
+  let beverageLog = loadContent(this.fs, this.path);
 
   employeeId = userInput.id;
   beverageType = userInput.type;
@@ -14,12 +16,20 @@ const saveTransaction = function(userInput) {
   };
 
   beverageLog.push(newEntry);
-
-  this.fs.writeFileSync(
-    this.path,
-    JSON.stringify(beverageLog, null, 2),
-    "utf8"
-  );
+  try {
+    this.fs.writeFileSync(
+      this.path,
+      JSON.stringify(beverageLog, null, 2),
+      "utf8"
+    );
+  } catch (e) {
+    this.fs.mkdirSync("./.data");
+    this.fs.writeFileSync(
+      this.path,
+      JSON.stringify(beverageLog, null, 2),
+      "utf8"
+    );
+  }
 
   newEntry.date = newEntry.date.toJSON();
 

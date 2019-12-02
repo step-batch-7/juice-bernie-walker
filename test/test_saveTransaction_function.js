@@ -8,6 +8,7 @@ describe("save", function() {
   const stampAndFs = {
     stamp: new Date(),
     fs: {
+      existsSync: () => true,
       readFileSync: function() {
         return JSON.stringify(object);
       },

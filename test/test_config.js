@@ -8,7 +8,7 @@ describe("getDataStorePath", function() {
   });
   it("should give default path when not configured", () => {
     const env = {};
-    assert.strictEqual(getDataStorePath(env), "./src/.beverage_details.JSON");
+    assert.strictEqual(getDataStorePath(env), "./.data/beverage_details.JSON");
   });
 });
 
