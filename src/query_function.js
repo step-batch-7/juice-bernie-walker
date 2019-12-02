@@ -2,9 +2,7 @@ const getEmployeeLog = require("./juice_utils.js").getEmployeeLog;
 const filterDesiredLog = require("./juice_utils.js").filterDesiredLog;
 
 const enquire = function(userInput) {
-  let beverageLog = JSON.parse(
-    this.fs.readFileSync("./src/.beverage_details.JSON", "utf8")
-  );
+  let beverageLog = JSON.parse(this.fs.readFileSync(this.path, "utf8"));
 
   const empId = userInput.id;
   const date = userInput.date;

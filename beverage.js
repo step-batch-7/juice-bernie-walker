@@ -5,9 +5,12 @@ const validatorAndFormatter = require("./src/input_validator_and_formatter.js")
   .validatorAndFormatter;
 const errorMessage = require("./src/error_message.js").errorMessage;
 const getPrintableOutput = require("./src/juice_utils.js").getPrintableOutput;
+const { getDataStorePath, timeStamp } = require("./src/config.js");
 
 const main = function() {
-  const stampAndPath = { stamp: new Date(), fs: fs };
+  const acessPath = getDataStorePath(process.env);
+  const time = timeStamp(process.env);
+  const stampAndPath = { stamp: time, fs: fs, path: acessPath };
   const lookup = {
     "--save": save.bind(stampAndPath),
     "--query": enquire.bind(stampAndPath),

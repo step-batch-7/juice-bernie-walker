@@ -3,24 +3,17 @@ const fs = require("fs");
 const assert = require("chai").assert;
 
 describe("save", function() {
-  const line1 = "Transaction recorded:\nEmployee ID,Beverage,Quantity,Date";
+  const line1 = "Transaction Recorded:\nEmployee ID,Beverage,Quantity,Date";
+  let object = [];
   const stampAndFs = {
     stamp: new Date(),
     fs: {
       readFileSync: function() {
-        const object = {
-          25314: [
-            {
-              employeeId: "25314",
-              beverage: "mango",
-              quantity: 1,
-              date: "2019-11-20T05:50:28.267Z"
-            }
-          ]
-        };
         return JSON.stringify(object);
       },
-      writeFileSync: function() {}
+      writeFileSync: function(path, content, encoding) {
+        object = content;
+      }
     }
   };
   const testInput = [{ id: "11111", type: "banana", qty: "1" }];
@@ -39,5 +32,13 @@ describe("save", function() {
       ]
     ];
     assert.deepStrictEqual(actual, expected);
+    assert.deepStrictEqual(JSON.parse(object), [
+      {
+        employeeId: "11111",
+        beverage: "banana",
+        quantity: 1,
+        date: stampAndFs.stamp.toJSON()
+      }
+    ]);
   });
 });

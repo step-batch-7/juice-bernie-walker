@@ -1,25 +1,22 @@
-const recordModifier = require("./record_modifier.js").recordModifier;
-
 const saveTransaction = function(userInput) {
-  let beverageLog = JSON.parse(
-    this.fs.readFileSync("./src/.beverage_details.JSON", "utf8")
-  );
+  let beverageLog = JSON.parse(this.fs.readFileSync(this.path, "utf8"));
 
   employeeId = userInput.id;
   beverageType = userInput.type;
   qty = +userInput.qty;
 
-  const header = "Transaction recorded:\nEmployee ID,Beverage,Quantity,Date";
+  const header = "Transaction Recorded:\nEmployee ID,Beverage,Quantity,Date";
   const newEntry = {
+    employeeId: employeeId,
     beverage: beverageType,
     quantity: qty,
     date: this.stamp
   };
 
-  recordModifier(beverageLog, employeeId, newEntry);
+  beverageLog.push(newEntry);
 
   this.fs.writeFileSync(
-    "./src/.beverage_details.JSON",
+    this.path,
     JSON.stringify(beverageLog, null, 2),
     "utf8"
   );

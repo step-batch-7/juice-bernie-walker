@@ -1,0 +1,66 @@
+---------appTest/req_02_query_on_employee_id.test----------
+			<= command =>
+(export JUICE_DATA_ACCESS_PATH="./appTest/preset_2_orange_juices_transactionData.json" ; node beverage.js --query --empId 11111)
+
+			<= actual output =>
+Employee ID,Beverage,Quantity,Date
+Total: 0 Juices
+
+			<= expected output =>
+Employee ID,Beverage,Quantity,Date
+11111,Orange,1,2019-11-20T05:50:28.267Z
+11111,Watermelon,1,2019-11-20T05:50:28.267Z
+Total: 2 Juices
+
+			<= difference =>
+2c2,4
+< Total: 0 Juices
+---
+> 11111,Orange,1,2019-11-20T05:50:28.267Z
+> 11111,Watermelon,1,2019-11-20T05:50:28.267Z
+> Total: 2 Juices
+---------appTest/req_02_query_with_no_stored_transactions.test----------
+			<= command =>
+(export JUICE_DATA_ACCESS_PATH="missingFile.json" ; node beverage.js --query --empId 11111)
+
+			<= actual output =>
+fs.js:114
+    throw err;
+    ^
+
+Error: ENOENT: no such file or directory, open 'missingFile.json'
+    at Object.openSync (fs.js:443:3)
+    at Object.readFileSync (fs.js:343:35)
+    at Object.enquire (/Users/step22/data/js_exercise/js_classroom_assignments/object_assignments/juice-bernie-walker/src/query_function.js:5:40)
+    at main (/Users/step22/data/js_exercise/js_classroom_assignments/object_assignments/juice-bernie-walker/beverage.js:22:49)
+    at Object.<anonymous> (/Users/step22/data/js_exercise/js_classroom_assignments/object_assignments/juice-bernie-walker/beverage.js:26:1)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+
+			<= expected output =>
+Employee ID, Beverage, Quantity, Date
+Total: 0 Juices
+
+			<= difference =>
+1,15c1,2
+< fs.js:114
+<     throw err;
+<     ^
+< 
+< Error: ENOENT: no such file or directory, open 'missingFile.json'
+<     at Object.openSync (fs.js:443:3)
+<     at Object.readFileSync (fs.js:343:35)
+<     at Object.enquire (/Users/step22/data/js_exercise/js_classroom_assignments/object_assignments/juice-bernie-walker/src/query_function.js:5:40)
+<     at main (/Users/step22/data/js_exercise/js_classroom_assignments/object_assignments/juice-bernie-walker/beverage.js:22:49)
+<     at Object.<anonymous> (/Users/step22/data/js_exercise/js_classroom_assignments/object_assignments/juice-bernie-walker/beverage.js:26:1)
+<     at Module._compile (internal/modules/cjs/loader.js:778:30)
+<     at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+<     at Module.load (internal/modules/cjs/loader.js:653:32)
+<     at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+<     at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+---
+> Employee ID, Beverage, Quantity, Date
+> Total: 0 Juices
