@@ -11,37 +11,34 @@ describe("enquire", function() {
     stamp: new Date(),
     fs: {
       readFileSync: function() {
-        const object = {
-          25314: [
-            {
-              employeeId: "25314",
-              beverage: "grape",
-              quantity: 1,
-              date: "2019-11-20T05:50:28.267Z"
-            },
-            {
-              employeeId: "25314",
-              beverage: "orange",
-              quantity: 1,
-              date: "2019-11-23T05:50:28.268Z"
-            }
-          ],
-          25318: [
-            {
-              employeeId: "25318",
-              beverage: "orange",
-              quantity: 1,
-              date: "2019-11-20T05:50:28.269Z"
-            },
-            {
-              employeeId: "25318",
-              beverage: "mango",
-              quantity: 1,
-              date: "2019-11-23T05:50:28.260Z"
-            }
-          ]
-        };
-        return JSON.stringify(object);
+        const array = [
+          {
+            employeeId: "25314",
+            beverage: "grape",
+            quantity: 1,
+            date: "2019-11-20T05:50:28.267Z"
+          },
+          {
+            employeeId: "25314",
+            beverage: "orange",
+            quantity: 1,
+            date: "2019-11-23T05:50:28.268Z"
+          },
+          {
+            employeeId: "25318",
+            beverage: "orange",
+            quantity: 1,
+            date: "2019-11-20T05:50:28.269Z"
+          },
+          {
+            employeeId: "25318",
+            beverage: "mango",
+            quantity: 1,
+            date: "2019-11-23T05:50:28.260Z"
+          }
+        ];
+
+        return JSON.stringify(array);
       },
       writeFileSync: function() {}
     }

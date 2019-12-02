@@ -39,10 +39,10 @@ const filterDesiredLog = function(arrayOfEntries, date, beverage) {
 
 const getEmployeeLog = function(record, id) {
   let requiredRecord = [];
-  for (employee in record) {
-    const newId = id || employee;
-    if (newId == employee) {
-      requiredRecord = requiredRecord.concat(record[newId]);
+  for (employeeLog of record) {
+    const newId = id || employeeLog.employeeId;
+    if (newId == employeeLog.employeeId) {
+      requiredRecord = requiredRecord.concat(employeeLog);
     }
   }
   return requiredRecord;

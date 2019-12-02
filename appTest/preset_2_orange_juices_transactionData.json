@@ -1,0 +1,14 @@
+[
+  {
+    "employeeId": 11111,
+    "beverage": "Orange",
+    "quantity": 1,
+    "date": "2019-11-20T05:50:28.267Z"
+  },
+  {
+    "employeeId": 11111,
+    "beverage": "Watermelon",
+    "quantity": 1,
+    "date": "2019-11-20T05:50:28.267Z"
+  }
+]

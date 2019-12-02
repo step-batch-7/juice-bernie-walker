@@ -5,28 +5,29 @@ const areDatesEqual = require("../src/juice_utils.js").areDatesEqual;
 const getPrintableOutput = require("../src/juice_utils.js").getPrintableOutput;
 
 describe("getEmployeeLog", function() {
-  const object = {
-    "12345": [
-      {
-        a: "someContent"
-      }
-    ],
-    "123456": [
-      {
-        b: "someOtherContent"
-      }
-    ]
-  };
+  const array = [
+    {
+      employeeId: "12345",
+      a: "someContent"
+    },
+    {
+      employeeId: "123456",
+      b: "someOtherContent"
+    }
+  ];
 
   it("should get the employee log of the entered id", function() {
-    const actual = getEmployeeLog(object, "12345");
-    const expected = [{ a: "someContent" }];
+    const actual = getEmployeeLog(array, "12345");
+    const expected = [{ a: "someContent", employeeId: "12345" }];
     assert.deepStrictEqual(actual, expected);
   });
 
   it("should get the entire data if the id is undefined", function() {
-    const actual = getEmployeeLog(object, undefined);
-    const expected = [{ a: "someContent" }, { b: "someOtherContent" }];
+    const actual = getEmployeeLog(array, undefined);
+    const expected = [
+      { a: "someContent", employeeId: "12345" },
+      { b: "someOtherContent", employeeId: "123456" }
+    ];
     assert.deepStrictEqual(actual, expected);
   });
 });
@@ -126,7 +127,7 @@ describe("getPrintableOutput", function() {
     assert.deepStrictEqual(actual, expected);
   });
 
-  it("should be able to get printable output when there are more than one objects in the body", function() {
+  it("should be able to get printable output when there are more than one arrays in the body", function() {
     const body = [
       { employeeId: "1", beverage: "a", quantity: 2, date: "1-2-3" },
       { employeeId: "1", beverage: "a", quantity: 2, date: "1-2-3" }

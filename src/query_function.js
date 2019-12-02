@@ -1,5 +1,4 @@
-const getEmployeeLog = require("./juice_utils.js").getEmployeeLog;
-const filterDesiredLog = require("./juice_utils.js").filterDesiredLog;
+const { getEmployeeLog, filterDesiredLog } = require("./juice_utils.js");
 
 const enquire = function(userInput) {
   let beverageLog = JSON.parse(this.fs.readFileSync(this.path, "utf8"));
@@ -11,8 +10,7 @@ const enquire = function(userInput) {
   const header = "Employee ID,Beverage,Quantity,Date";
   let footer = "Total: 0 Juices";
 
-  if (!date && !beverage && !(empId in beverageLog))
-    return [header, [], footer];
+  if (!date && !beverage && !empId) return [header, [], footer];
 
   const employeeLog = getEmployeeLog(beverageLog, empId);
   const { result, beverageCount } = filterDesiredLog(
