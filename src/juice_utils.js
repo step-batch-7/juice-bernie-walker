@@ -1,4 +1,12 @@
-const getPrintableOutput = function(printContent) {
+exports.loadContent = function(fileSystem, path) {
+  let content = [];
+  if (fileSystem.existsSync(path)) {
+    content = JSON.parse(fileSystem.readFileSync(path, "utf8"));
+  }
+  return content;
+};
+
+exports.getPrintableOutput = function(printContent) {
   const body = printContent[1].map(
     object =>
       `${object.employeeId},${object.beverage},${object.quantity},${object.date}`
@@ -21,7 +29,7 @@ const areDatesEqual = function(date1String, date2String) {
   return yearEqual && monthEqual && dateEqual;
 };
 
-const filterDesiredLog = function(arrayOfEntries, date, beverage) {
+exports.filterDesiredLog = function(arrayOfEntries, date, beverage) {
   let result = [];
   let beverageCount = 0;
 
@@ -37,7 +45,7 @@ const filterDesiredLog = function(arrayOfEntries, date, beverage) {
   return { result, beverageCount };
 };
 
-const getEmployeeLog = function(record, id) {
+exports.getEmployeeLog = function(record, id) {
   let requiredRecord = [];
   for (employeeLog of record) {
     const newId = id || employeeLog.employeeId;
@@ -48,7 +56,4 @@ const getEmployeeLog = function(record, id) {
   return requiredRecord;
 };
 
-exports.filterDesiredLog = filterDesiredLog;
-exports.getEmployeeLog = getEmployeeLog;
 exports.areDatesEqual = areDatesEqual;
-exports.getPrintableOutput = getPrintableOutput;

@@ -1,7 +1,11 @@
-const { getEmployeeLog, filterDesiredLog } = require("./juice_utils.js");
+const {
+  getEmployeeLog,
+  filterDesiredLog,
+  loadContent
+} = require("./juice_utils.js");
 
 const enquire = function(userInput) {
-  let beverageLog = JSON.parse(this.fs.readFileSync(this.path, "utf8"));
+  let beverageLog = loadContent(this.fs, this.path);
 
   const empId = userInput.id;
   const date = userInput.date;

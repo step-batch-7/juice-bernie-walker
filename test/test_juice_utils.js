@@ -1,8 +1,11 @@
 const assert = require("chai").assert;
-const getEmployeeLog = require("../src/juice_utils.js").getEmployeeLog;
-const filterDesiredLog = require("../src/juice_utils.js").filterDesiredLog;
-const areDatesEqual = require("../src/juice_utils.js").areDatesEqual;
-const getPrintableOutput = require("../src/juice_utils.js").getPrintableOutput;
+const {
+  getEmployeeLog,
+  filterDesiredLog,
+  areDatesEqual,
+  getPrintableOutput,
+  loadContent
+} = require("../src/juice_utils.js");
 
 describe("getEmployeeLog", function() {
   const array = [
@@ -153,5 +156,24 @@ describe("getPrintableOutput", function() {
     const actual = getPrintableOutput([header, [], footer]);
     const expected = `${header}\n${footer}`;
     assert.strictEqual(actual, expected);
+  });
+});
+
+describe("loadContent", function() {
+  const fakeFs = {
+    existsSync: x => x == "existingPath",
+    readFileSync: () => JSON.stringify(["sampleText"])
+  };
+
+  it("should load an empty array when path doesn't exist", function() {
+    const actual = loadContent(fakeFs, "nonExistingPath");
+    const expected = [];
+    assert.deepStrictEqual(actual, expected);
+  });
+
+  it("shold return the file content when the path is right", function() {
+    const actual = loadContent(fakeFs, "existingPath");
+    const expected = ["sampleText"];
+    assert.deepStrictEqual(actual, expected);
   });
 });

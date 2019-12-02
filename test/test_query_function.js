@@ -10,6 +10,7 @@ describe("enquire", function() {
   const stampAndFs = {
     stamp: new Date(),
     fs: {
+      existsSync: () => true,
       readFileSync: function() {
         const array = [
           {
@@ -44,7 +45,7 @@ describe("enquire", function() {
     }
   };
 
-  it("should return error message for wrong Id or no input", function() {
+  it("should give back just the template for wrong Id or no input", function() {
     let actual = enquire.call(stampAndFs, {});
     const expected = [header, [], footer1];
     assert.deepStrictEqual(actual, expected);
